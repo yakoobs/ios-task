@@ -22,6 +22,9 @@ class CampaignListingView: UICollectionView {
 
         /** The cell which is used to display a campaign. */
         case campaignCell
+        
+        /** The cell which is used to display an info about connection problem */
+        case errorCell
     }
 
     /**
@@ -29,11 +32,35 @@ class CampaignListingView: UICollectionView {
      */
     func display(campaigns: CampaignList) {
         let campaignDataSource = ListingDataSource(campaigns: campaigns)
-        dataSource = campaignDataSource
-        delegate = campaignDataSource
-        strongDataSource = campaignDataSource
+        display(from: campaignDataSource)
+    }
+    
+    /**
+     Display loading screen.
+    */
+    func displayLoading() {
+        display(from: LoadingDataSource())
+    }
+    
+    /**
+    Display error info
+    */
+    func displayError() {
+        display(from: ErrorDataSource())
+    }
+    
+    /**
+     Generic display function.
+     
+     - Parameter source: The data source that need to be displayed.
+     */
+    func display<T>(from source: T) where T: UICollectionViewDataSource & UICollectionViewDelegate {
+        dataSource = source
+        delegate = source
+        strongDataSource = source
         reloadData()
     }
+    
 }
 
 
@@ -80,20 +107,42 @@ class ListingDataSource: NSObject, UICollectionViewDataSource, UICollectionViewD
 
 }
 
+final class LoadingDataSource: SingleCellDataSource {
+    convenience init() {
+        self.init(cell: .loadingIndicatorCell)
+    }
+}
 
+final class ErrorDataSource: SingleCellDataSource {
+    convenience init() { self.init(cell: .errorCell) }
+}
 
 /**
- The data source for the `CampaignsListingView` which is used while the actual contents are still loaded.
+ The single cell data source for the `CampaignsListingView` which is used while the actual contents are still loaded or to display the info about connection problem
  */
-class LoadingDataSource: NSObject, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-
+class SingleCellDataSource: NSObject, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    typealias Cell = CampaignListingView.Cells
+    
+    /** The cell that need to be displayed. */
+    let cell: Cell
+    
+    /**
+     Designated initializer.
+     
+     - Parameter cell: The cell that need to be displayed.
+     */
+    init(cell: Cell) {
+        self.cell = cell
+    }
+    
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 1
     }
 
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let reuseIdentifier = CampaignListingView.Cells.loadingIndicatorCell.rawValue
+        let reuseIdentifier = cell.rawValue
         return collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier,
                                                   for: indexPath)
     }

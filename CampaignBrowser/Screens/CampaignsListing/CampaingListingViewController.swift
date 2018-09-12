@@ -22,13 +22,27 @@ class CampaignListingViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+        fetchCampaigns()
+    }
+    
+    private func fetchCampaigns() {
         // Load the campaign list and display it as soon as it is available.
         ServiceLocator.instance.networkingService
             .createObservableResponse(request: CampaignListingRequest())
             .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { [weak self] campaigns in
+            .subscribe(
+                onNext: { [weak self] campaigns in
                 self?.typedView.display(campaigns: campaigns)
-            })
+                },
+                onError: { [weak self] (_) in
+                    self?.typedView.displayError()
+                }
+            )
             .addDisposableTo(disposeBag)
+    }
+    
+    @IBAction func retryFetch(_ sender: Any) {
+        typedView.displayLoading()
+        fetchCampaigns()
     }
 }
