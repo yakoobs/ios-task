@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -36,14 +36,14 @@
                                             <rect key="frame" x="8" y="8" width="359" height="267"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YiC-pw-PH8" customClass="LabelWithPadding" customModule="CampaignBrowser" customModuleProvider="target">
-                                            <rect key="frame" x="8" y="202.5" width="60.5" height="36.5"/>
+                                            <rect key="frame" x="8" y="234.5" width="44.5" height="20.5"/>
                                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iKV-MD-vzF" customClass="LabelWithPadding" customModule="CampaignBrowser" customModuleProvider="target">
-                                            <rect key="frame" x="8" y="239" width="359" height="28"/>
+                                            <rect key="frame" x="8" y="255" width="359" height="12"/>
                                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <edgeInsets key="layoutMargins" top="8" left="20" bottom="8" right="8"/>
                                             <fontDescription key="fontDescription" name="HoeflerText-Regular" family="Hoefler Text" pointSize="12"/>
@@ -70,7 +70,7 @@
                                     <outlet property="nameLabel" destination="YiC-pw-PH8" id="zNK-GY-IKJ"/>
                                 </connections>
                             </collectionViewCell>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="loadingIndicatorCell" id="SZh-Y0-q4r">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="loadingIndicatorCell" id="SZh-Y0-q4r" customClass="LoadingCell" customModule="CampaignBrowser" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="293" width="375" height="225"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -86,6 +86,41 @@
                                 <constraints>
                                     <constraint firstItem="o42-h4-YUU" firstAttribute="centerY" secondItem="SZh-Y0-q4r" secondAttribute="centerY" id="BHm-qk-dsS"/>
                                     <constraint firstItem="o42-h4-YUU" firstAttribute="centerX" secondItem="SZh-Y0-q4r" secondAttribute="centerX" id="GpV-75-nCU"/>
+                                </constraints>
+                                <size key="customSize" width="375" height="225"/>
+                                <connections>
+                                    <outlet property="activityIndicator" destination="o42-h4-YUU" id="Efo-7f-3A6"/>
+                                </connections>
+                            </collectionViewCell>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="errorCell" id="6Ep-JL-Yvk">
+                                <rect key="frame" x="0.0" y="528" width="375" height="225"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="225"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There was an error. Please check your internet connection and try again." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fcZ-MQ-si9">
+                                            <rect key="frame" x="8" y="92" width="359" height="41"/>
+                                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="24r-y0-5Iy">
+                                            <rect key="frame" x="168.5" y="149" width="37" height="30"/>
+                                            <state key="normal" title="Retry"/>
+                                            <connections>
+                                                <action selector="retryFetch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Hs6-Zw-D6s"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                </view>
+                                <constraints>
+                                    <constraint firstItem="fcZ-MQ-si9" firstAttribute="centerY" secondItem="6Ep-JL-Yvk" secondAttribute="centerY" id="JJQ-f4-YLd"/>
+                                    <constraint firstItem="fcZ-MQ-si9" firstAttribute="centerX" secondItem="6Ep-JL-Yvk" secondAttribute="centerX" id="Ywg-oi-E5S"/>
+                                    <constraint firstItem="24r-y0-5Iy" firstAttribute="top" secondItem="fcZ-MQ-si9" secondAttribute="bottom" constant="16" id="gmm-eq-GrV"/>
+                                    <constraint firstItem="fcZ-MQ-si9" firstAttribute="leading" secondItem="6Ep-JL-Yvk" secondAttribute="leading" constant="8" id="t0Z-fR-Kuh"/>
+                                    <constraint firstItem="24r-y0-5Iy" firstAttribute="centerX" secondItem="6Ep-JL-Yvk" secondAttribute="centerX" id="wus-J0-NZ8"/>
+                                    <constraint firstAttribute="trailing" secondItem="fcZ-MQ-si9" secondAttribute="trailing" constant="8" id="xh7-Ro-2VD"/>
                                 </constraints>
                                 <size key="customSize" width="375" height="225"/>
                             </collectionViewCell>
